@@ -1,0 +1,49 @@
+.jumbotron {
+    margin-top: 20px;
+    background-image: url(‘http://hight3ch.com/wp-content/uploads/2015/12/nasa-mission-to-mars1.jpg’);
+    background-size: cover;
+    background-repeat: no-repeat;
+   }
+body {
+    background: #8FC1E3;
+  }
+
+  .box {
+      background: #F7F9FB;
+      margin: 12px 12px 12px 12px;
+      padding: 3px 3px 3px 3px;
+  }
+a img {
+    padding: 1px;
+ } 
+img.wrap {float: left;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
+h2 {color: #687864;
+    font-family: Palatino;
+    font-size: 36px;
+    font-weight: 275;
+    margin-left: 2em;
+     }
+
+h3 {color: #687864;
+    font-family: Palatino;
+    font-size: 24px;
+    font-weight: 275;
+}
+h4 {color: black;
+    font-family: Palatino;
+    font-size: 20px;
+    font-weight: 275;
+    margin-left: 5em;
+    }
+
+p {font-size: 24px;}
+
+.figure-caption {
+    color: #687864;
+    font-family: Palatino;
+    font-size: 14px;
+        }
