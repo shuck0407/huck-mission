@@ -12,7 +12,7 @@ app = Flask(__name__)
 #Pymongo Setup
 #################################################
 
-mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
+mongo = PyMongo(app, uri="mongodb://stefanie:mart4ino@ds249233.mlab.com:49233/mars_app")
 
 #################################################
 # Flask Routes
