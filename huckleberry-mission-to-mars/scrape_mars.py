@@ -175,6 +175,7 @@ def mars_hemispheres():
     mars_usgs_url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
     browser.visit(mars_usgs_url)
 
+
     #store the html in a variable called usgs_html    
     usgs_html = browser.html
 
@@ -184,52 +185,64 @@ def mars_hemispheres():
     #Get the URL for the featured image-full size
 
     product_box = usgs_soup.find('div', class_='collapsible results')
-    
+
     #create lists to hold the partial and full links to each hemisphere's page
     hemi_links = []
     hemi_urls = []
 
-    for item in product_box.find_all('div', class_='item'):
-        hemi_links.append(item.find('a').get('href'))
+    #pre-load the hemi array because the page is permanently down
 
-    #beginning of url to append
-    link_beg = "https://astrogeology.usgs.gov"
+    hemisphere_image_urls =  [{"title" : "Cerberus Hemisphere", "image" : "http://astropedia.astrogeology.usgs.gov/download/Mars/Viking/cerberus_enhanced.tif/full.jpg"},
+     {"title" : "Schiaparelli Hemisphere", "image" : "http://astropedia.astrogeology.usgs.gov/download/Mars/Viking/schiaparelli_enhanced.tif/full.jpg"},
+      {"title" : "Syrtis Major Hemisphere", "image" : "http://astropedia.astrogeology.usgs.gov/download/Mars/Viking/syrtis_major_enhanced.tif/full.jpg"},
+      {"title" : "Valles Marineris Hemisphere", "image" : "http://astropedia.astrogeology.usgs.gov/download/Mars/Viking/valles_marineris_enhanced.tif/full.jpg"}]
 
-    #create a new list to store the entire url string
-    for link in hemi_links:
-        link = link_beg + link
-        hemi_urls.append(link)
- 
-    #visit each hemisphere's links using Splinter and get the images
-    #Create an empty list to store the dictionaries for all hemispheres
-    hemisphere_image_urls = []
 
-    #Create an empty list to store the title and image link for each hemisphere
-    hemi_dict = {}
+    if product_box:
 
-    for url in hemi_urls:
-        browser.visit(url)
-        hemi_html = browser.html
+        hemisphere_image_urls = []
 
-        # create a soup object from the html. 
-        hemi_soup = BeautifulSoup(hemi_html, "html.parser")
+        for item in product_box.find_all('div', class_='item'):
+            hemi_links.append(item.find('a').get('href'))
 
-        #store the title
-        title = hemi_soup.find('h2', class_='title').text
-        title = title.replace(' Enhanced', '')
-        
-        print(f"Hemisphere: {title}")
+        #beginning of url to append
+        link_beg = "https://astrogeology.usgs.gov"
 
-        #go to the downloads section to get the list of images and pick the full image
-        hemi_download = hemi_soup.find('div', class_='downloads')
-        hemi_list = hemi_download.find('li')
-        hemi_image = hemi_list.a['href']
-        
-        print(f"Image: {hemi_image}")
+        #create a new list to store the entire url string
+        for link in hemi_links:
+            link = link_beg + link
+            hemi_urls.append(link)
 
-        hemi_dict = {'title' : title, 'image' : hemi_image}
-    
-        hemisphere_image_urls.append(hemi_dict)
+        #visit each hemisphere's links using Splinter and get the images
+        #Create an empty list to store the dictionaries for all hemispheres
+        hemisphere_image_urls = []
+
+        #Create an empty list to store the title and image link for each hemisphere
+        hemi_dict = {}
+
+        for url in hemi_urls:
+            browser.visit(url)
+            hemi_html = browser.html
+
+            # create a soup object from the html. 
+            hemi_soup = BeautifulSoup(hemi_html, "html.parser")
+
+            #store the title
+            title = hemi_soup.find('h2', class_='title').text
+            title = title.replace(' Enhanced', '')
+            
+            print(f"Hemisphere: {title}")
+
+            #go to the downloads section to get the list of images and pick the full image
+            hemi_download = hemi_soup.find('div', class_='downloads')
+            hemi_list = hemi_download.find('li')
+            hemi_image = hemi_list.a['href']
+            
+            print(f"Image: {hemi_image}")
+
+            hemi_dict = {'title' : title, 'image' : hemi_image}
+
+            hemisphere_image_urls.append(hemi_dict)
 
     return hemisphere_image_urls
 
