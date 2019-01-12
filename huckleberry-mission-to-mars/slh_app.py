@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, redirect
 import pymongo
-import scrape_mars
+
 #Import Python functions from the scrape_mars.py file
 from .scrape_mars import scrape
 
