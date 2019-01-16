@@ -9,7 +9,6 @@ import pymongo
 import tweepy
 import json
 import pandas as pd
-from config import consumer_key, consumer_secret, access_token, access_token_secret
 import time 
 
 def init_browser():
