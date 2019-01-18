@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, redirect
-import pymongo
+from flask_pymongo import PyMongo
 
 #Import Python functions from the scrape_mars.py file
 from .scrape_mars import scrape
@@ -14,7 +14,7 @@ app = Flask(__name__)
 #Pymongo Setup
 #################################################
 
-mongo = pymongo(app, uri="mongodb://stefanie:mart4ino@ds249233.mlab.com:49233/mars_app")
+mongo = PyMongo(app, uri="mongodb://stefanie:mart4ino@ds249233.mlab.com:49233/mars_app")
 
 #################################################
 # Flask Routes
